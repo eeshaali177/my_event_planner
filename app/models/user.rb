@@ -3,4 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         has_many :sent_invitations, foreign_key: "sender_id", class_name: "Invitation"
+has_many :received_invitations, foreign_key: "recipient_id", class_name: "Invitation"
+
 end
