@@ -7,7 +7,7 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new
   end
   def create
-    @invitation = current_user.invitations.build(invitation_params)
+    @invitation = current_user.sent_invitations.build(invitation_params)
     if @invitation.save
       redirect_to @invitation.event, notice: 'Invitation sent successfully.'
     else
