@@ -1,0 +1,8 @@
+<%= form_with(model: invitation, local: true) do |form| %>
+    <%= form.hidden_field :event_id, value: @event.id %>
+    <%= form.hidden_field :sender_id, value: current_user.id %>
+    <%= form.label :recipient_id %>
+    <%= form.select :recipient_id, options_for_select(User.all.map { |u| [u.email, u.id] }), include_blank: true %>
+    <%= form.submit "Send Invitation" %>
+  <% end %>
+  

@@ -7,3 +7,17 @@
 <div>
   <%= link_to "Back to events", events_path %>
 </div>
+<%= form_with(model: @event) do |form| %>
+  <!-- Event fields -->
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  
+  <!-- Invitation fields -->
+  <%= form.fields_for :invitations do |invitation_form| %>
+    <%= invitation_form.hidden_field :sender_id, value: current_user.id %>
+    <%= invitation_form.label :recipient_id %>
+    <%= invitation_form.select :recipient_id, options_for_select(User.all.map { |u| [u.email, u.id] }), include_blank: true %>
+  <% end %>
+  
+  <%= form.submit %>
+<% end %>
