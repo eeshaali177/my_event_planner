@@ -3,9 +3,9 @@ class InvitationsController < ApplicationController
   before_action :set_invitation, only: [:destroy, :update]
   
   def new
+    @event = Event.find(params[:event_id])
     @invitation = Invitation.new
   end
-
   def create
     @invitation = current_user.invitations.build(invitation_params)
     if @invitation.save
