@@ -10,16 +10,6 @@
 </div>
 
 
-<h1><%= @event.title %></h1>
 
-
-<!-- Display event details -->
-
-<h2>Create Invitation</h2>
-<%= form_with(model: [@event, @invitation], local: true) do |form| %>
-  <%= form.label :user_id, "Select User to Invite" %>
-  <%= form.collection_select :user_id, User.all, :id, :title, prompt: "Select User" %>
-  
-  <%= form.submit "Send Invitation" %>
-<% end %>
 <%= link_to 'Create Invitation', new_event_invitation_path(@event), class: 'btn btn-primary' %>
+<%= render partial: 'invitations/form', locals: { invitation: @invitation } %>
