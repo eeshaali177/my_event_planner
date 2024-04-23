@@ -6,14 +6,17 @@ class InvitationsController < ApplicationController
     @event = Event.find(params[:event_id])
     @invitation = Invitation.new
   end
+  
   def create
     @invitation = current_user.sent_invitations.build(invitation_params)
+    @invitation.event_id = params[:event_id] # Set the event_id from the params
     if @invitation.save
       redirect_to @invitation.event, notice: 'Invitation sent successfully.'
     else
       render :new
     end
   end
+  
 
   def destroy
     @invitation.destroy
