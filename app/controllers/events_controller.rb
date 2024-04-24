@@ -8,6 +8,10 @@ class EventsController < ApplicationController
 
   # GET /events/1 or /events/1.json
   def show
+    
+      @event = Event.find(params[:id])
+      @invitation = Invitation.new
+    
   end
 
   # GET /events/new
@@ -21,18 +25,19 @@ class EventsController < ApplicationController
 
   # POST /events or /events.json
   def create
-    @event = Event.new(event_params)
-
+    @event = current_user.events.build(event_params)
+  
     respond_to do |format|
       if @event.save
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json { render json: @event.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
+  
 
   # PATCH/PUT /events/1 or /events/1.json
   def update
@@ -61,10 +66,20 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+      if @event.id != params[:id].to_i
+        # Yahan appropriate action le sakte ho, jaise redirect ya error handle
+        redirect_to root_path, alert: "You are not authorized to view this event."
+      end
     end
+    
 
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:title, :description, :date, :time, :location)
+    end
+    def authorize_user!
+      unless current_user == @event.user
+        redirect_to root_path, alert: 'You are not authorized to access this event.'
+      end
     end
 end
