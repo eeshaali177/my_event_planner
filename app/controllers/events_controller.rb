@@ -3,7 +3,13 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.all
+    if current_user
+      @events = current_user.events
+    else
+     
+      redirect_to new_user_session_path
+    end
+    
   end
 
   # GET /events/1 or /events/1.json

@@ -12,3 +12,13 @@
 </div>
 
 <%= link_to "New event", new_event_path %>
+<h1>Your Events</h1>
+<% @events.each do |event| %>
+  <div>
+    <h2><%= event.title %></h2>
+    <p><%= event.description %></p>
+    <p>Date: <%= event.date %></p>
+    <p>Time: <%= event.time %></p>
+    <p>Location: <%= event.location %></p>
+  </div>
+<% end %>
