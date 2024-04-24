@@ -67,16 +67,22 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def upcoming
+    @upcoming_events = current_user.events.where('date >= ?', Date.today)
+  end
+  
+  def past
+    @past_events = current_user.events.where('date < ?', Date.today)
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-      if @event.id != params[:id].to_i
-        # Yahan appropriate action le sakte ho, jaise redirect ya error handle
-        redirect_to root_path, alert: "You are not authorized to view this event."
+   
+      def set_event
+        @event = Event.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        redirect_to root_path, alert: "Event not found."
       end
-    end
+   
     
 
     # Only allow a list of trusted parameters through.
