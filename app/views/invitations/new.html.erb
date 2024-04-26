@@ -1,16 +1,12 @@
-<%= form_with(model: @invitation, url: event_invitations_path(@event), local: true) do |form| %>
-    <div>
-      <%= form.label :recipient_id, "Recipient ID" %>
-      <%= form.text_field :recipient_id %>
-    </div>
-  
-    <!-- Include additional form fields here if needed -->
-  
+<%= form_with(model: [@event, @invitation], url: event_invitations_path(@event), local: true) do |form| %>
     <%= form.hidden_field :event_id, value: @event.id %>
-    <%= form.hidden_field :sender_id, value: current_user.id %>
-  
-    <div>
-      <%= form.submit "Send Invitation" %>
-    </div>
+    <%= form.label :recipient_email %>
+    <%= form.email_field :recipient_email %>
+    <%= form.submit %>
+  <% end %>
+  <%= form_with(model: @invitation, url: invitations_path, method: :post) do |f| %>
+    <%= f.hidden_field :event_id, value: @event.id %>
+    <%= f.hidden_field :recipient_id, value: @recipient.id %>
+    <%= f.submit 'Send Invitation' %>
   <% end %>
   

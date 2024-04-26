@@ -1,0 +1,6 @@
+<p> hi i am invitation detail</p>
+<% @invitations.each do |invitation| %>
+    <!-- Display invitation details -->
+    <%= invitation.sender.email %> invited <%= invitation.recipient.email %> to <%= invitation.event.title %>
+  <% end %>
+  

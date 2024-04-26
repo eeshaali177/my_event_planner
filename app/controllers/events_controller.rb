@@ -75,8 +75,14 @@ class EventsController < ApplicationController
     @past_events = current_user.events.where('date < ?', Date.today)
   end
   private
-    # Use callbacks to share common setup or constraints between actions.
-   
+  def check_invitation_recipients
+    @invitations.each do |invitation|
+      unless invitation.recipient && invitation.recipient.email.present?
+        flash.now[:alert] = "One or more invitations do not have a recipient assigned or the recipient's email address is missing."
+        break
+      end
+    end
+  end
       def set_event
         @event = Event.find(params[:id])
       rescue ActiveRecord::RecordNotFound

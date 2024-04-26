@@ -19,14 +19,14 @@
 <h2>Attendees:</h2>
 <ul>
   <% @event.attendees.each do |attendee| %>
-    <li><%= attendee.name %></li>
+    <li><%= attendee.email %></li>
   <% end %>
 </ul>
 
 <h2>Invited Users:</h2>
 <ul>
   <% @event.invitations.each do |invitation| %>
-    <li><%= invitation.recipient.name %></li>
+    <li><%= invitation.recipient.email %></li>
   <% end %>
 </ul>
 <%= link_to 'Create Invitation', new_event_invitation_path(@event), class: 'btn btn-primary' %>

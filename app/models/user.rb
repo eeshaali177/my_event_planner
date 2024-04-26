@@ -6,7 +6,7 @@ has_many :events
          :recoverable, :rememberable, :validatable
          has_many :sent_invitations, foreign_key: "sender_id", class_name: "Invitation"
 has_many :received_invitations, foreign_key: "recipient_id", class_name: "Invitation"
-has_many :invited_events, through: :invitations, source: :event
+belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
 has_many :notifications
 
   def unread_notifications
