@@ -1,12 +1,7 @@
-<%= form_with(model: [@event, @invitation], url: event_invitations_path(@event), local: true) do |form| %>
-    <%= form.hidden_field :event_id, value: @event.id %>
-    <%= form.label :recipient_email %>
-    <%= form.email_field :recipient_email %>
-    <%= form.submit %>
-  <% end %>
-  <%= form_with(model: @invitation, url: invitations_path, method: :post) do |f| %>
-    <%= f.hidden_field :event_id, value: @event.id %>
-    <%= f.hidden_field :recipient_id, value: @recipient.id %>
-    <%= f.submit 'Send Invitation' %>
-  <% end %>
-  
+<form action="<%= event_invitations_path(@event) %>" method="post">
+  <%= csrf_meta_tags %>
+  <label for="invitation_recipient_id">Recipient:</label> <!-- Changed id to "invitation_recipient_id" -->
+  <%= select_tag "invitation[recipient_id]", options_for_select(User.all.map{|u| [u.email, u.id]}), prompt: "Select recipient" %> <!-- Changed select_tag to include "invitation[recipient_id]" -->
+  <br>
+  <%= submit_tag "Send Invitation" %>
+</form>

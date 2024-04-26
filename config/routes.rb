@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :events do
-    resources :invitations, only: [:new, :create, :destroy] do
+    resources :invitations do
       member do
         patch 'accept'
         patch 'reject'
@@ -19,5 +19,5 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
- root "events#index"
+  root "events#index"
 end

@@ -24,10 +24,6 @@
 </ul>
 
 <h2>Invited Users:</h2>
-<ul>
-  <% @event.invitations.each do |invitation| %>
-    <li><%= invitation.recipient.email %></li>
-  <% end %>
-</ul>
+
 <%= link_to 'Create Invitation', new_event_invitation_path(@event), class: 'btn btn-primary' %>
 <%= render partial: 'invitations/form', locals: { invitation: @invitation } %>

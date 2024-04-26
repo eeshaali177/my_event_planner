@@ -1,4 +1,4 @@
-<%= form_with(model: @invitations, local: true) do |form| %>
+<%= form_with(model:  @invitations, local: true) do |form| %>
     <% if invitation.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(invitation.errors.count, "error") %> prohibited this invitation from being saved:</h2>
@@ -11,10 +11,7 @@
       </div>
     <% end %>
   
-    <div class="field">
-      <%= form.label :sender_id %>
-      <%= form.text_field :sender_id %>
-    </div>
+    
   <p> hiiiiii</p>
     <div class="field">
       <%= form.label :recipient_id %>
@@ -23,7 +20,7 @@
   
     <div class="actions">
     <p> i am invitation</p>
-      <%= form.submit %>
+      <%= form.submit 'send invitation' %>
     </div>
   <% end %>
   

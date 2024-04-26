@@ -1,31 +1,44 @@
 class InvitationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_invitation, only: [:destroy, :update]
+  before_action :set_invitation, only: [:destroy, :update, :accept, :reject]
   
   def new
     @event = Event.find(params[:event_id])
-    @invitation = Invitation.new
+    @invitation = @event.invitations.new
   end
   
   def create
-    @invitation = current_user.sent_invitations.build(invitation_params)
-    @invitation.event_id = params[:event_id] # Set the event_id from the params
+    @event = Event.find(params[:event_id])
+    @invitation = @event.invitations.new(invitation_params)
+    @invitation.sender = current_user
     if @invitation.save
-      redirect_to Event.find(@invitation.event_id), notice: 'Invitation sent successfully.'
+      flash[:notice] = 'Invitation sent successfully.'
+      redirect_to event_path(@event) 
     else
       render :new
     end
   end
-  
 
   def destroy
+    authorize_user!
     @invitation.destroy
     redirect_to invitations_path, notice: 'Invitation deleted successfully.'
   end
 
   def update
-    @invitation.update(status: 'accepted')
-    redirect_to invitations_path, notice: 'Invitation accepted successfully.'
+    authorize_user!
+    @invitation.update(invitation_params)
+    redirect_to invitations_path, notice: 'Invitation updated successfully.'
+  end
+
+  def accept
+    @invitation.accepted!
+    redirect_to events_path, notice: 'Invitation accepted successfully.'
+  end
+
+  def reject
+    @invitation.rejected!
+    redirect_to notifications_path, notice: 'Invitation rejected successfully.'
   end
 
   private
@@ -41,6 +54,6 @@ class InvitationsController < ApplicationController
   end
 
   def invitation_params
-    params.require(:invitation).permit(:recipient_id, :event_id)
+    params.require(:invitation).permit(:recipient_id, :event_id, :status)
   end
 end
