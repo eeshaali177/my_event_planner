@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'b0b6357ba5d42455aeff415d993a86acc910ad8d12cf154b4d8a7254a3f1cac3bd1a9a04f2456094134913eb00a05707d19724a9e7af418c93537ee579916b4b'
+  # config.secret_key = '16de6bdbcd3846983bf97e84f54bda7b17a87b4ab9e1d36d46a6d0085d578285a2341078606390124bcb8f7d00a57ebff1cfda58a7b20db737d845d427a0dc75'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -126,62 +126,13 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '71574f57462f3ac5573e528fa4d0af1fe959de8f26eae6c6377bb4d1cadbab91331589038f2d3a3fe1f1107069c14428bcc794c8bc9cd7c61a197d8543c317bb'
+  # config.pepper = '7306fc366e8ac8b3ab61ca747400588d840f892062076975a1558a94a52454c2c8d7bf6d288a7ef0a5cd3c8d39ef7c61418659fd01d0f84e1fa06e08f04aad32'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
 
   # Send a notification email when the user's password is changed.
   # config.send_password_change_notification = false
-
-  # ==> Configuration for :invitable
-  # The period the generated invitation token is valid.
-  # After this period, the invited resource won't be able to accept the invitation.
-  # When invite_for is 0 (the default), the invitation won't expire.
-  # config.invite_for = 2.weeks
-
-  # Number of invitations users can send.
-  # - If invitation_limit is nil, there is no limit for invitations, users can
-  # send unlimited invitations, invitation_limit column is not used.
-  # - If invitation_limit is 0, users can't send invitations by default.
-  # - If invitation_limit n > 0, users can send n invitations.
-  # You can change invitation_limit column for some users so they can send more
-  # or less invitations, even with global invitation_limit = 0
-  # Default: nil
-  # config.invitation_limit = 5
-
-  # The key to be used to check existing users when sending an invitation
-  # and the regexp used to test it when validate_on_invite is not set.
-  # config.invite_key = { email: /\A[^@]+@[^@]+\z/ }
-  # config.invite_key = { email: /\A[^@]+@[^@]+\z/, username: nil }
-
-  # Ensure that invited record is valid.
-  # The invitation won't be sent if this check fails.
-  # Default: false
-  # config.validate_on_invite = true
-
-  # Resend invitation if user with invited status is invited again
-  # Default: true
-  # config.resend_invitation = false
-
-  # The class name of the inviting model. If this is nil,
-  # the #invited_by association is declared to be polymorphic.
-  # Default: nil
-  # config.invited_by_class_name = 'User'
-
-  # The foreign key to the inviting model (if invited_by_class_name is set)
-  # Default: :invited_by_id
-  # config.invited_by_foreign_key = :invited_by_id
-
-  # The column name used for counter_cache column. If this is nil,
-  # the #invited_by association is declared without counter_cache.
-  # Default: nil
-  # config.invited_by_counter_cache = :invitations_count
-
-  # Auto-login after the user accepts the invite. If this is false,
-  # the user will need to manually log in after accepting the invite.
-  # Default: true
-  # config.allow_insecure_sign_in_after_accept = false
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -315,7 +266,7 @@ Devise.setup do |config|
   # config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
-  config.sign_out_via = :get
+  config.sign_out_via = :delete
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
