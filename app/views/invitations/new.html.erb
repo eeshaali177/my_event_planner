@@ -1,7 +1,0 @@
-<form action="<%= event_invitations_path(@event) %>" method="post">
-  <%= csrf_meta_tags %>
-  <label for="invitation_recipient_id">Recipient:</label> <!-- Changed id to "invitation_recipient_id" -->
-  <%= select_tag "invitation[recipient_id]", options_for_select(User.all.map{|u| [u.email, u.id]}), prompt: "Select recipient" %> <!-- Changed select_tag to include "invitation[recipient_id]" -->
-  <br>
-  <%= submit_tag "Send Invitation" %>
-</form>

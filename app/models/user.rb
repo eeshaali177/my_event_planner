@@ -3,13 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 has_many :events
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :invitable
          has_many :sent_invitations, foreign_key: "sender_id", class_name: "Invitation"
-has_many :received_invitations, foreign_key: "recipient_id", class_name: "Invitation"
-belongs_to :recipient, class_name: 'User', foreign_key: 'recipient_id'
-has_many :notifications
-
-  def unread_notifications
-    self.notifications.unread.count 
-  end
+has_many :invitees, class_name: 'User', foreign_key: invited_by_id
 end

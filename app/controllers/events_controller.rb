@@ -16,13 +16,14 @@ class EventsController < ApplicationController
   def show
     
       @event = Event.find(params[:id])
-      @invitation = Invitation.new
+  
     
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    
   end
 
   # GET /events/1/edit

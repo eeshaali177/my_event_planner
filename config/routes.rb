@@ -1,18 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :events do
-    resources :invitations do
-      member do
-        patch 'accept'
-        patch 'reject'
-      end
-    end
-  end
-  resources :notifications, only: [:index] do
-    member do
-      patch :mark_as_read
-    end
-  end
+  
+  resources :events 
+   
+  devise_for :users, controllers: { invitations: 'users/invitations' }
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

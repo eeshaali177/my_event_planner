@@ -2,20 +2,9 @@
 
 <%= form_with(model: @event) do |form| %>
   <%= render "form", form: form %>
-  
-  <!-- Invitation fields -->
-  <p> invitation</p>
-  <%= form.fields_for :invitations do |invitation_form| %>
-    <%= invitation_form.hidden_field :sender_id, value: current_user.id %>
-    <%= invitation_form.label :recipient_id %>
-    <%= invitation_form.select :recipient_id, options_for_select(User.all.map { |u| [u.email, u.id] }), include_blank: true %>
-  <% end %>
-  
-  <%= form.submit %>
-<% end %>
-
-<br>
+ 
 
 <div>
   <%= link_to "Back to events", events_path %>
 </div>
+<% end %>
