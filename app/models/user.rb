@@ -4,6 +4,6 @@ class User < ApplicationRecord
 has_many :events
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :invitable
-         has_many :sent_invitations, foreign_key: "sender_id", class_name: "Invitation"
-has_many :invitees, class_name: 'User', foreign_key: invited_by_id
+
+has_many :invitees, class_name: 'User', foreign_key: :invited_by_id
 end

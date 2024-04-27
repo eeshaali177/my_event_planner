@@ -5,6 +5,7 @@
 <div>
   <%= link_to "Edit this event", edit_event_path(@event) %> |
   <%= link_to "Back to events", events_path %>
+  <%= link_to "invite" ,new_user_invitation_path  %>
 
   <%= button_to "Destroy this event", @event, method: :delete %>
 </div>
